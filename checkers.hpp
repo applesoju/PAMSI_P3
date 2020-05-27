@@ -25,7 +25,8 @@ public:
 
 	bool gameStart();					// rozpoczêcie gry
 	int gameOver(int _gameState);		// koniec gry, wyœwietl kto wygra³
-	void gameLoop();					// pêtla gry 
+	void gameLoop();					// pêtla gry
+	void gameLoopForDriver();			// pêtla gry dla drivera
 
 	bool closeWindow();					// metoda zamykaj¹ca okno
 	int mouseHandler();					// metoda obs³uguj¹ca mysz

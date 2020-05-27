@@ -153,6 +153,34 @@ void Checkers::gameLoop() {
 	}
 }
 
+void Checkers::gameLoopForDriver() {
+	for (int i = 0; i < boardSize; ++i) {
+		for (int j = 0; j < boardSize; ++j) {
+			board.board[i][j] = empty;
+		}
+	}
+	board.board[2][3] = board.board[2][5] = board.board[2][7] = board.board[2][9] = whiteM;
+	board.board[0][9] = whiteK;
+	board.board[7][2] = board.board[7][4] = board.board[7][6] = board.board[7][8] = blackM;
+	board.board[9][1] = blackK;
+
+	if (gameStart()) {				// jeœli  gra zostanie zaczêta poprzez wciœniêcie "u"
+		while (window.isOpen()) {	// dopóki okno jest otwarte
+			drawGameContent();		// rysuj elementy gry
+			window.display();
+
+			if (player) {			// jeœli jest teraz ruch gracza
+				movePlayer();		// wykonaj ruch
+			}
+			else moveAi();			// jeœli jest ruch ai, wykonaj ruch ai
+
+			player = !player;		// zmieñ to, czyja jest tura
+
+			if (gameOver(board.checkGameState(player))) return;	// sprawdŸ, czy gra siê zakoñczy³a
+		}
+	}
+}
+
 bool Checkers::closeWindow() {
 	sf::Event event;
 
